@@ -20,12 +20,12 @@
         .top-bar .center { background: linear-gradient(90deg, #b3c2ff, #8e2de2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .dot { height: 6px; width: 6px; background-color: #00ff88; border-radius: 50%; display: inline-block; margin-left: 5px; box-shadow: 0 0 10px #00ff88; }
         .icon-container { text-align: center; margin-bottom: 15px; }
-        .shield-bg { display: inline-flex; justify-content: center; align-items: center; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, rgba(0, 210, 255, 0.15), rgba(142, 45, 226, 0.15)); border: 1px solid rgba(0, 210, 255, 0.4); box-shadow: 0 0 20px rgba(0, 210, 255, 0.3); }
-        .shield-icon { font-size: 28px; filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.8)); }
+        .shield-bg { display: inline-flex; justify-content: center; align-items: center; width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 210, 255, 0.2) 0%, rgba(3, 6, 20, 0.8) 70%); border: 2px solid #00d2ff; box-shadow: 0 0 25px rgba(0, 210, 255, 0.5), inset 0 0 15px rgba(0, 210, 255, 0.3); position: relative; }
+        .shield-icon { font-size: 35px; color: #00d2ff; text-shadow: 0 0 15px #00d2ff; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.8; } 100% { transform: scale(1); opacity: 1; } }
         .title-area { text-align: center; margin-bottom: 25px; }
         .title-area h1 { margin: 0; font-size: 24px; font-weight: 900; letter-spacing: 0.5px; background: linear-gradient(to right, #ffffff 0%, #b3c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1; }
         .gradient-text { background: linear-gradient(90deg, #00f2fe 0%, #4facfe 50%, #8e2de2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 26px; margin-top: 4px; text-transform: uppercase; font-weight: 900; line-height: 1.1; filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.3)); }
-        /* बदललेला भाग: लाल रंग */
         .subtitle { color: #ff0000 !important; font-size: 12px; margin-top: 8px; font-weight: 600; letter-spacing: 0.5px; }
         .features-grid { display: flex; flex-direction: row; gap: 8px; margin-bottom: 20px; justify-content: space-between; }
         .feature-box { flex: 1; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 10px 5px; display: flex; flex-direction: column; align-items: center; gap: 5px; transition: 0.3s; text-align: center; }
@@ -40,7 +40,6 @@
         .fake-captcha-box:hover { border-color: #00d2ff; box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
         .cap-left { display: flex; align-items: center; gap: 12px; }
         .cap-checkbox { width: 22px; height: 22px; border: 2px solid #8892b0; border-radius: 4px; transition: 0.3s; display: flex; justify-content: center; align-items: center; }
-        .fake-captcha-box:hover .cap-checkbox { border-color: #00d2ff; }
         .cap-spinner { width: 22px; height: 22px; border: 3px solid rgba(0, 210, 255, 0.2); border-top-color: #00d2ff; border-radius: 50%; animation: spin 1s linear infinite; display: none; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .cap-tick { font-size: 20px; color: #00ff88; display: none; filter: drop-shadow(0 0 5px #00ff88); }
@@ -57,18 +56,10 @@
 <body>
 <div id="mtc-fullscreen-wrapper">
     <div class="mtc-box">
-        <div class="top-bar">
-            <span>🛡️ SHIELD ACTIVE</span>
-            <span class="center">— MTC-SHIELD PROTECTION —</span>
-            <span><span id="time"></span> <span class="dot"></span></span>
-        </div>
+        <div class="top-bar"><span>🛡️ SHIELD ACTIVE</span><span class="center">— MTC-SHIELD PROTECTION —</span><span><span id="time"></span> <span class="dot"></span></span></div>
         <div id="genUI">
             <div class="icon-container"><div class="shield-bg"><div class="shield-icon">⚙️</div></div></div>
-            <div class="title-area">
-                <h1>MTC LINK</h1>
-                <div class="gradient-text">GENERATOR</div>
-                <div class="subtitle">Secure Link Creation System Active</div>
-            </div>
+            <div class="title-area"><h1>MTC LINK</h1><div class="gradient-text">GENERATOR</div><div class="subtitle">Advanced Anti-Bot Protection System</div></div>
             <input type="text" id="inLink" class="mtc-input" placeholder="">
             <button class="mtc-btn" onclick="gen()">ENCRYPT & GENERATE</button>
             <div id="linkOut"></div>
@@ -76,19 +67,14 @@
         </div>
         <div id="capUI" style="display:none;">
             <div class="icon-container"><div class="shield-bg"><div class="shield-icon">✔️</div></div></div>
-            <div class="title-area">
-                <h1>HUMAN VERIFICATION</h1>
-                <div class="gradient-text">REQUIRED</div>
-                <div class="subtitle">Advanced Anti-Bot Protection System</div>
-            </div>
+            <div class="title-area"><h1>HUMAN VERIFICATION</h1><div class="gradient-text">REQUIRED</div><div class="subtitle">Advanced Anti-Bot Protection System</div></div>
             <div class="features-grid">
                 <div class="feature-box"><div class="feature-icon">🛡️</div><div class="feature-text"><span class="feature-title">ENCRYPTED</span><span class="feature-sub">Secure Connection</span></div></div>
                 <div class="feature-box"><div class="feature-icon">🤖</div><div class="feature-text"><span class="feature-title">PREVENTION</span><span class="feature-sub">Manual Verify</span></div></div>
                 <div class="feature-box"><div class="feature-icon">⚡</div><div class="feature-text"><span class="feature-title">FAST & SAFE</span><span class="feature-sub">Instant Redirect</span></div></div>
             </div>
             <div class="verify-section">
-                <div class="verify-title">🔓 VERIFY YOU ARE HUMAN</div>
-                <div class="verify-sub">Please click the checkbox below to continue</div>
+                <div class="verify-title">🔓 VERIFY YOU ARE HUMAN</div><div class="verify-sub">Please click the checkbox below to continue</div>
                 <div class="fake-captcha-box" id="verifyWidget" onclick="startVerification()">
                     <div class="cap-left"><div class="cap-checkbox" id="c-box"></div><div class="cap-spinner" id="c-spinner"></div><div class="cap-tick" id="c-tick">✔️</div><div class="cap-text">Verify you are human</div></div>
                     <div class="cap-right"><div class="cap-logo">MTC PROTECT</div><div class="cap-terms">Privacy - Terms</div></div>
@@ -99,14 +85,35 @@
     </div>
 </div>
 <script>
+    const map = { 'o':'7', 'g':'9', 'E':'w', '6':'k', 'a':'m', 'A':'p', 'e':'r', 'Y':'1', '4':'x', 'v':'a', 'p':'b', '2':'k', 'n':'z' };
+    const revMap = Object.fromEntries(Object.entries(map).map(([k, v]) => [v, k]));
     function updateTime() { const now = new Date(); document.getElementById('time').innerText = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
     setInterval(updateTime, 1000); updateTime();
-    const params = new URLSearchParams(window.location.search); const v = params.get('v');
-    if (v) { document.getElementById('genUI').style.display = 'none'; document.getElementById('capUI').style.display = 'block'; }
-    function gen() { const val = document.getElementById('inLink').value; if (val.includes("nowshort.com/")) { const id = val.split("nowshort.com/")[1]; const finalLink = window.location.origin + window.location.pathname + "?v=" + id; document.getElementById('linkOut').innerText = finalLink; document.getElementById('linkOut').style.display = 'block'; document.getElementById('copyBtn').style.display = 'block'; } }
-    function copyLink() { navigator.clipboard.writeText(document.getElementById('linkOut').innerText); const btn = document.getElementById('copyBtn'); btn.innerHTML = "LINK COPIED! <span style='color:#00ff88'>✔️</span>"; setTimeout(() => btn.innerHTML = "COPY SECURE LINK", 2500); }
+    const params = new URLSearchParams(window.location.search); let encId = params.get('v');
+    if (encId) { document.getElementById('genUI').style.display = 'none'; document.getElementById('capUI').style.display = 'block'; }
+    function gen() {
+        const val = document.getElementById('inLink').value;
+        if (val.includes("nowshort.com/")) {
+            const id = val.split("nowshort.com/")[1];
+            const enc = id.split('').map(c => map[c] || c).join('');
+            const finalLink = window.location.origin + "/s/" + enc;
+            document.getElementById('linkOut').innerText = finalLink;
+            document.getElementById('linkOut').style.display = 'block';
+            document.getElementById('copyBtn').style.display = 'block';
+        }
+    }
+    function copyLink() { navigator.clipboard.writeText(document.getElementById('linkOut').innerText); const btn = document.getElementById('copyBtn'); btn.innerHTML = "LINK COPIED! ✔️"; setTimeout(() => btn.innerHTML = "COPY SECURE LINK", 2500); }
     let isVerifying = false;
-    function startVerification() { if (isVerifying || !v) return; isVerifying = true; document.getElementById('c-box').style.display = 'none'; document.getElementById('c-spinner').style.display = 'block'; document.getElementById('verifyWidget').style.borderColor = '#00d2ff'; setTimeout(() => { document.getElementById('c-spinner').style.display = 'none'; document.getElementById('c-tick').style.display = 'block'; document.getElementById('verifyWidget').style.borderColor = '#00ff88'; setTimeout(() => { window.location.href = "https://nowshort.com/" + v; }, 600); }, 1500); }
+    function startVerification() {
+        if (isVerifying || !encId) return;
+        isVerifying = true;
+        document.getElementById('c-box').style.display = 'none'; document.getElementById('c-spinner').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('c-spinner').style.display = 'none'; document.getElementById('c-tick').style.display = 'block';
+            const originalId = encId.split('').map(c => revMap[c] || c).join('');
+            setTimeout(() => { window.location.href = "https://nowshort.com/" + originalId; }, 600);
+        }, 1500);
+    }
 </script>
 </body>
 </html>
