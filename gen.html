@@ -60,7 +60,7 @@
         <div id="genUI">
             <div class="icon-container"><div class="shield-bg"><div class="shield-icon">⚙️</div></div></div>
             <div class="title-area"><h1>MTC LINK</h1><div class="gradient-text">GENERATOR</div><div class="subtitle">Advanced Anti-Bot Protection System</div></div>
-            <input type="text" id="inLink" class="mtc-input" placeholder="">
+            <input type="text" id="inLink" class="mtc-input" placeholder="Paste Nowshort link here">
             <button class="mtc-btn" onclick="gen()">ENCRYPT & GENERATE</button>
             <div id="linkOut"></div>
             <button id="copyBtn" class="mtc-btn" style="display:none; margin-top:12px; background: linear-gradient(90deg, #1f2937, #374151);" onclick="copyLink()">COPY SECURE LINK</button>
@@ -85,12 +85,17 @@
     </div>
 </div>
 <script>
-    const map = { 'o':'7', 'g':'9', 'E':'w', '6':'k', 'a':'m', 'A':'p', 'e':'r', 'Y':'1', '4':'x', 'v':'a', 'p':'b', '2':'k', 'n':'z' };
+    const map = { 'a':'m', 'b':'n', 'c':'o', 'd':'p', 'e':'r', 'f':'s', 'g':'9', 'h':'u', 'i':'v', 'j':'w', 'k':'x', 'l':'y', 'm':'z', 'n':'a', 'o':'7', 'p':'b', 'q':'c', 'r':'d', 's':'e', 't':'f', 'u':'g', 'v':'h', 'w':'i', 'x':'j', 'y':'k', 'z':'l', 'A':'p', 'B':'q', 'C':'r', 'D':'s', 'E':'w', 'F':'u', 'G':'v', 'H':'w', 'I':'x', 'J':'y', 'K':'z', 'L':'a', 'M':'b', 'N':'c', 'O':'d', 'P':'e', 'Q':'f', 'R':'g', 'S':'h', 'T':'i', 'U':'j', 'V':'k', 'W':'l', 'X':'m', 'Y':'1', 'Z':'n', '1':'Y', '2':'k', '3':'l', '4':'x', '5':'v', '6':'k', '7':'o', '8':'p', '9':'g', '0':'a' };
     const revMap = Object.fromEntries(Object.entries(map).map(([k, v]) => [v, k]));
+    
     function updateTime() { const now = new Date(); document.getElementById('time').innerText = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
     setInterval(updateTime, 1000); updateTime();
-    const params = new URLSearchParams(window.location.search); let encId = params.get('v');
+    
+    let pathParts = window.location.pathname.split('/');
+    let encId = pathParts.includes('s') ? pathParts[pathParts.length - 1] : new URLSearchParams(window.location.search).get('v');
+
     if (encId) { document.getElementById('genUI').style.display = 'none'; document.getElementById('capUI').style.display = 'block'; }
+    
     function gen() {
         const val = document.getElementById('inLink').value;
         if (val.includes("nowshort.com/")) {
