@@ -61,7 +61,6 @@
             <div class="icon-container"><div class="shield-bg"><div class="shield-icon">⚙️</div></div></div>
             <div class="title-area"><h1>MTC LINK</h1><div class="gradient-text">GENERATOR</div><div class="subtitle">Advanced Anti-Bot Protection System</div></div>
             
-            <!-- येथे 3 बॉक्स दिले आहेत -->
             <input type="text" id="inLink1" class="mtc-input" placeholder="Paste link here">
             <input type="text" id="inLink2" class="mtc-input" placeholder="Paste link here">
             <input type="text" id="inLink3" class="mtc-input" placeholder="Paste link here">
@@ -86,11 +85,14 @@
                 </div>
             </div>
         </div>
-        <div class="mtc-footer"><span>✔️ MTC-SHIELD v2.0</span><span style="text-align: center;">SYSTEM ACTIVE</span><span style="text-align: right;">SECURE 🌐</span></div>
+        <div class="mtc-footer">
+            <span style="color: #00d2ff;">✔️ MTC-SHIELD V2.0</span>
+            <span style="text-align: center;"><span class="dot"></span> SYSTEM ACTIVE</span>
+            <span style="text-align: right;">SECURE 🌐</span>
+        </div>
     </div>
 </div>
 <script>
-    // परफेक्ट Symmetric Mapping
     const map = {
         'A':'Z', 'Z':'A', 'B':'Y', 'Y':'B', 'C':'X', 'X':'C', 'D':'W', 'W':'D', 'E':'V', 'V':'E',
         'F':'U', 'U':'F', 'G':'T', 'T':'G', 'H':'S', 'S':'H', 'I':'R', 'R':'I', 'J':'Q', 'Q':'J',
@@ -108,7 +110,6 @@
     setInterval(updateTime, 1000); 
     updateTime();
     
-    // लिंक मधील ID शोधणे
     let pathParts = window.location.pathname.split('/');
     let encId = pathParts.includes('s') ? pathParts[pathParts.length - 1] : new URLSearchParams(window.location.search).get('v');
 
@@ -117,11 +118,8 @@
         document.getElementById('capUI').style.display = 'block'; 
     }
     
-    // लिंक जनरेट (Encrypt) करणे - आता ३ लिंक्ससाठी
     function gen() {
         let generatedLinks = [];
-        
-        // तिन्ही बॉक्स चेक करणे
         for(let i = 1; i <= 3; i++) {
             const val = document.getElementById('inLink' + i).value.trim();
             if (val && val.includes("nowshort.com/")) {
@@ -130,17 +128,13 @@
                 generatedLinks.push(window.location.origin + "/s/" + enc);
             }
         }
-
-        // जर एकतरी लिंक जनरेट झाली असेल
         if (generatedLinks.length > 0) {
-            // सर्व लिंक एका खाली एक (नवीन लाईनवर) दाखवणे
             document.getElementById('linkOut').innerText = generatedLinks.join('\n');
             document.getElementById('linkOut').style.display = 'block';
             document.getElementById('copyBtn').style.display = 'block';
         }
     }
     
-    // सर्व लिंक एकत्र कॉपी करणे
     function copyLink() { 
         navigator.clipboard.writeText(document.getElementById('linkOut').innerText); 
         const btn = document.getElementById('copyBtn'); 
@@ -148,7 +142,6 @@
         setTimeout(() => btn.innerHTML = "COPY ALL SECURE LINKS", 2500); 
     }
     
-    // डिकोड आणि रिडायरेक्ट करणे
     let isVerifying = false;
     function startVerification() {
         if (isVerifying || !encId) return;
@@ -160,7 +153,6 @@
             document.getElementById('c-spinner').style.display = 'none'; 
             document.getElementById('c-tick').style.display = 'block';
             
-            // डिकोडिंग प्रकिया
             const originalId = encId.split('').map(c => map[c] || c).join('');
             
             setTimeout(() => { 
