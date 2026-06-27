@@ -16,7 +16,8 @@
             font-family: 'Inter', sans-serif !important; overflow-y: auto !important;
         }
         .mtc-box { width: 94%; max-width: 500px; background: rgba(10, 15, 30, 0.7); border: 1px solid rgba(0, 210, 255, 0.15); border-radius: 16px; padding: 25px 20px; box-shadow: 0 15px 50px rgba(0,0,0,0.6), inset 0 0 20px rgba(142, 45, 226, 0.1); backdrop-filter: blur(15px); color: #fff; box-sizing: border-box; max-height: 95vh; overflow-y: auto; position: relative; }
-        .top-bar { display: flex; justify-content: space-between; font-size: 9px; font-weight: 800; letter-spacing: 1px; color: #00d2ff; margin-bottom: 20px; text-transform: uppercase; align-items: center; }
+        .top-bar { display: flex; justify-content: space-between; font-size: 9px; font-weight: 800; letter-spacing: 1px; color: #00d2ff; margin-bottom: 20px; text-transform: uppercase; align-items: center; position: relative; }
+        .top-bar-left { display: flex; align-items: center; gap: 8px; }
         .top-bar .center { background: linear-gradient(90deg, #b3c2ff, #8e2de2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .dot { height: 6px; width: 6px; background-color: #00ff88; border-radius: 50%; display: inline-block; margin-left: 5px; box-shadow: 0 0 10px #00ff88; }
         .icon-container { text-align: center; margin-bottom: 15px; }
@@ -56,7 +57,19 @@
 <body>
 <div id="mtc-fullscreen-wrapper">
     <div class="mtc-box">
-        <div class="top-bar"><span>🛡️ SHIELD ACTIVE</span><span class="center">— MTC-SHIELD PROTECTION —</span><span><span id="time"></span> <span class="dot"></span></span></div>
+        <!-- सुधारित टोप-बार -->
+        <div class="top-bar">
+            <div class="top-bar-left">
+                <span>🛡️ SHIELD ACTIVE</span>
+                <!-- होम बटण सिम्बॉलच्या खाली -->
+                <a href="https://mtc-go.vercel.app/gen.html" style="color: #00d2ff; text-decoration: none; width: 22px; height: 22px; border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; background: rgba(0, 210, 255, 0.05); margin-top: 25px; margin-left: -95px;">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                </a>
+            </div>
+            <span class="center">— MTC-SHIELD PROTECTION —</span>
+            <span><span id="time"></span> <span class="dot"></span></span>
+        </div>
+        
         <div id="genUI">
             <div class="icon-container"><div class="shield-bg"><div class="shield-icon">⚙️</div></div></div>
             <div class="title-area"><h1>MTC LINK</h1><div class="gradient-text">GENERATOR</div><div class="subtitle">Advanced Anti-Bot Protection System</div></div>
@@ -70,10 +83,6 @@
             <button id="copyBtn" class="mtc-btn" style="display:none; margin-top:12px; background: linear-gradient(90deg, #1f2937, #374151);" onclick="copyLink()">COPY ALL SECURE LINKS</button>
         </div>
         <div id="capUI" style="display:none;">
-            <a href="https://mtc-go.vercel.app/gen.html" style="position: absolute; top: 28px; right: 20px; color: #00d2ff; text-decoration: none; width: 22px; height: 22px; border: 1px solid rgba(0, 210, 255, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; z-index: 10; background: rgba(0, 210, 255, 0.05); transition: 0.3s;">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-            </a>
-            
             <div class="icon-container"><div class="shield-bg"><div class="shield-icon">✔️</div></div></div>
             <div class="title-area"><h1>HUMAN VERIFICATION</h1><div class="gradient-text">REQUIRED</div><div class="subtitle">Advanced Anti-Bot Protection System</div></div>
             <div class="features-grid">
