@@ -20,15 +20,10 @@
         .top-bar-left { display: flex; align-items: center; gap: 6px; }
         .top-bar .center { background: linear-gradient(90deg, #b3c2ff, #8e2de2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .dot { height: 6px; width: 6px; background-color: #00ff88; border-radius: 50%; display: inline-block; margin-left: 5px; box-shadow: 0 0 10px #00ff88; }
-        
-        /* प्रीमियम सायबर लूकसाठी नवीन स्टाईल्स */
-        .icon-container { text-align: center; margin-bottom: 15px; position: relative; }
-        .shield-bg { display: inline-flex; justify-content: center; align-items: center; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 210, 255, 0.1) 0%, transparent 70%); position: relative; }
-        .shield-ring { position: absolute; width: 100px; height: 100px; border: 2px solid rgba(0, 210, 255, 0.3); border-radius: 50%; border-top-color: #00d2ff; animation: spin 4s linear infinite; }
-        .shield-icon-new { color: #00d2ff; filter: drop-shadow(0 0 15px #00d2ff); animation: pulse 2s infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-
+        .icon-container { text-align: center; margin-bottom: 15px; }
+        .shield-bg { display: inline-flex; justify-content: center; align-items: center; width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 210, 255, 0.2) 0%, rgba(3, 6, 20, 0.8) 70%); border: 2px solid #00d2ff; box-shadow: 0 0 25px rgba(0, 210, 255, 0.5), inset 0 0 15px rgba(0, 210, 255, 0.3); position: relative; }
+        .shield-icon { font-size: 35px; color: #00d2ff; text-shadow: 0 0 15px #00d2ff; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.8; } 100% { transform: scale(1); opacity: 1; } }
         .title-area { text-align: center; margin-bottom: 25px; }
         .title-area h1 { margin: 0; font-size: 24px; font-weight: 900; letter-spacing: 0.5px; background: linear-gradient(to right, #ffffff 0%, #b3c2ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1; }
         .gradient-text { background: linear-gradient(90deg, #00f2fe 0%, #4facfe 50%, #8e2de2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 26px; margin-top: 4px; text-transform: uppercase; font-weight: 900; line-height: 1.1; filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.3)); }
@@ -42,7 +37,7 @@
         .verify-section { border: 1px solid rgba(142, 45, 226, 0.4); border-radius: 12px; padding: 15px; text-align: center; background: rgba(142, 45, 226, 0.08); margin-bottom: 15px; box-shadow: inset 0 0 20px rgba(142, 45, 226, 0.05); }
         .verify-title { font-size: 13px; font-weight: 800; margin-bottom: 5px; color: #fff; letter-spacing: 0.5px; }
         .verify-sub { font-size: 11px; color: #b3c2ff; margin-bottom: 15px; }
-        .fake-captcha-box { display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(0, 210, 255, 0.3); border-radius: 8px; padding: 10px 15px; width: 90%; max-width: 280px; margin: 0 auto; cursor: pointer; transition: 0.3s; }
+        .fake-captcha-box { display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(0, 210, 255, 0.3); border-radius: 8px; padding: 10px 15px; width: 100%; max-width: 300px; margin: 0 auto; cursor: pointer; transition: 0.3s; }
         .fake-captcha-box:hover { border-color: #00d2ff; box-shadow: 0 0 15px rgba(0, 210, 255, 0.2); }
         .cap-left { display: flex; align-items: center; gap: 12px; }
         .cap-checkbox { width: 22px; height: 22px; border: 2px solid #8892b0; border-radius: 4px; transition: 0.3s; display: flex; justify-content: center; align-items: center; }
@@ -74,7 +69,7 @@
         </div>
         
         <div id="genUI">
-            <div class="icon-container"><div class="shield-bg"><div class="shield-icon-new">⚙️</div></div></div>
+            <div class="icon-container"><div class="shield-bg"><div class="shield-icon">⚙️</div></div></div>
             <div class="title-area"><h1>MTC LINK</h1><div class="gradient-text">GENERATOR</div><div class="subtitle">Advanced Anti-Bot Protection System</div></div>
             
             <input type="text" id="inLink1" class="mtc-input" placeholder="Paste link here">
@@ -86,17 +81,7 @@
             <button id="copyBtn" class="mtc-btn" style="display:none; margin-top:12px; background: linear-gradient(90deg, #1f2937, #374151);" onclick="copyLink()">COPY ALL SECURE LINKS</button>
         </div>
         <div id="capUI" style="display:none;">
-            <div class="icon-container">
-                <div class="shield-bg">
-                    <div class="shield-ring"></div>
-                    <div class="shield-icon-new">
-                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                            <path d="M9 12l2 2 4-4"></path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
+            <div class="icon-container"><div class="shield-bg"><div class="shield-icon">🛡️</div></div></div>
             <div class="title-area"><h1>HUMAN VERIFICATION</h1><div class="gradient-text">REQUIRED</div><div class="subtitle">Advanced Anti-Bot Protection System</div></div>
             <div class="features-grid">
                 <div class="feature-box"><div class="feature-icon">🛡️</div><div class="feature-text"><span class="feature-title">ENCRYPTED</span><span class="feature-sub">Secure Connection</span></div></div>
