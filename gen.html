@@ -20,7 +20,7 @@
         .top-bar-left { display: flex; align-items: center; gap: 6px; }
         .top-bar .center { background: linear-gradient(90deg, #b3c2ff, #8e2de2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .dot { height: 6px; width: 6px; background-color: #00ff88; border-radius: 50%; display: inline-block; margin-left: 5px; box-shadow: 0 0 10px #00ff88; }
-        
+
         /* प्रीमियम सायबर लूकसाठी नवीन स्टाईल्स */
         .icon-container { text-align: center; margin-bottom: 15px; position: relative; }
         .shield-bg { display: inline-flex; justify-content: center; align-items: center; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 210, 255, 0.1) 0%, transparent 70%); position: relative; }
@@ -72,15 +72,15 @@
             <span class="center">MTC-SHIELD PROTECTION</span>
             <span><span id="time"></span> <span class="dot"></span></span>
         </div>
-        
+
         <div id="genUI">
             <div class="icon-container"><div class="shield-bg"><div class="shield-icon-new">⚙️</div></div></div>
             <div class="title-area"><h1>MTC LINK</h1><div class="gradient-text">GENERATOR</div><div class="subtitle">Advanced Anti-Bot Protection System</div></div>
-            
+
             <input type="text" id="inLink1" class="mtc-input" placeholder="Paste link here">
             <input type="text" id="inLink2" class="mtc-input" placeholder="Paste link here">
             <input type="text" id="inLink3" class="mtc-input" placeholder="Paste link here">
-            
+
             <button class="mtc-btn" onclick="gen()">ENCRYPT & GENERATE</button>
             <div id="linkOut"></div>
             <button id="copyBtn" class="mtc-btn" style="display:none; margin-top:12px; background: linear-gradient(90deg, #1f2937, #374151);" onclick="copyLink()">COPY ALL SECURE LINKS</button>
@@ -160,7 +160,18 @@
             document.getElementById('c-spinner').style.display = 'none'; 
             document.getElementById('c-tick').style.display = 'block';
             const originalId = encId.split('').map(c => map[c] || c).join('');
-            setTimeout(() => { window.location.href = "https://nowshort.com/" + originalId; }, 600);
+            
+            setTimeout(() => { 
+                let finalUrl;
+                // जर डिकोड झालेली लिंक http किंवा t.me ने सुरू होत असेल तर थेट रिडायरेक्ट करा, नाहीतर nowshort कडे पाठवा
+                if (originalId.startsWith("http") || originalId.startsWith("t.me")) {
+                    finalUrl = originalId.startsWith("t.me") ? "https://" + originalId : originalId;
+                } else {
+                    finalUrl = "https://nowshort.com/" + originalId;
+                }
+                window.location.href = finalUrl; 
+            }, 600);
+            
         }, 1500);
     }
 </script>
