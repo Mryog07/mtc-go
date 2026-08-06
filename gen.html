@@ -21,7 +21,6 @@
         .top-bar .center { background: linear-gradient(90deg, #b3c2ff, #8e2de2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .dot { height: 6px; width: 6px; background-color: #00ff88; border-radius: 50%; display: inline-block; margin-left: 5px; box-shadow: 0 0 10px #00ff88; }
 
-        /* प्रीमियम सायबर लूकसाठी नवीन स्टाईल्स */
         .icon-container { text-align: center; margin-bottom: 15px; position: relative; }
         .shield-bg { display: inline-flex; justify-content: center; align-items: center; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 210, 255, 0.1) 0%, transparent 70%); position: relative; }
         .shield-ring { position: absolute; width: 100px; height: 100px; border: 2px solid rgba(0, 210, 255, 0.3); border-radius: 50%; border-top-color: #00d2ff; animation: spin 4s linear infinite; }
@@ -133,13 +132,17 @@
     let pathParts = window.location.pathname.split('/');
     let encId = pathParts.includes('s') ? pathParts[pathParts.length - 1] : new URLSearchParams(window.location.search).get('v');
     if (encId) { document.getElementById('genUI').style.display = 'none'; document.getElementById('capUI').style.display = 'block'; }
+    
     function gen() {
         let generatedLinks = [];
         for(let i = 1; i <= 3; i++) {
             const val = document.getElementById('inLink' + i).value.trim();
-            if (val && val.includes("nowshort.com/")) {
-                const id = val.split("nowshort.com/")[1].trim();
-                const enc = id.split('').map(c => map[c] || c).join('');
+            if (val) {
+                let targetId = val;
+                if (val.includes("nowshort.com/")) {
+                    targetId = val.split("nowshort.com/")[1].trim();
+                }
+                const enc = targetId.split('').map(c => map[c] || c).join('');
                 generatedLinks.push(window.location.origin + "/s/" + enc);
             }
         }
@@ -149,6 +152,7 @@
             document.getElementById('copyBtn').style.display = 'block';
         }
     }
+
     function copyLink() { navigator.clipboard.writeText(document.getElementById('linkOut').innerText); const btn = document.getElementById('copyBtn'); btn.innerHTML = "LINKS COPIED! ✔️"; setTimeout(() => btn.innerHTML = "COPY ALL SECURE LINKS", 2500); }
     let isVerifying = false;
     function startVerification() {
@@ -163,10 +167,14 @@
 
             setTimeout(() => { 
                 let finalUrl;
-                
-                // शॉर्टनर OFF असेल तर t.me जोडून थेट टेलिग्रामवर पाठवा, ON असेल तर nowshort कडे पाठवा
-                if (originalId.includes("start=") || originalId.includes("bot") || originalId.startsWith("FilesCart")) {
-                    finalUrl = "https://t.me/" + originalId;
+
+                // जर डिकोड केलेली लिंक http ने सुरू होत असेल (किंवा टेलिग्रामची लिंक असेल), तर ती थेट वापरा
+                if (originalId.startsWith("http") || originalId.includes("t.me/") || originalId.includes("start=")) {
+                    if (originalId.startsWith("http")) {
+                        finalUrl = originalId;
+                    } else {
+                        finalUrl = "https://" + originalId;
+                    }
                 } else {
                     finalUrl = "https://nowshort.com/" + originalId;
                 }
