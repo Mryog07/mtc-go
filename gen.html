@@ -160,18 +160,19 @@
             document.getElementById('c-spinner').style.display = 'none'; 
             document.getElementById('c-tick').style.display = 'block';
             const originalId = encId.split('').map(c => map[c] || c).join('');
-            
+
             setTimeout(() => { 
                 let finalUrl;
-                // जर डिकोड झालेली लिंक http किंवा t.me ने सुरू होत असेल तर थेट रिडायरेक्ट करा, नाहीतर nowshort कडे पाठवा
-                if (originalId.startsWith("http") || originalId.startsWith("t.me")) {
-                    finalUrl = originalId.startsWith("t.me") ? "https://" + originalId : originalId;
+                
+                // शॉर्टनर OFF असेल तर t.me जोडून थेट टेलिग्रामवर पाठवा, ON असेल तर nowshort कडे पाठवा
+                if (originalId.includes("start=") || originalId.includes("bot") || originalId.startsWith("FilesCart")) {
+                    finalUrl = "https://t.me/" + originalId;
                 } else {
                     finalUrl = "https://nowshort.com/" + originalId;
                 }
                 window.location.href = finalUrl; 
             }, 600);
-            
+
         }, 1500);
     }
 </script>
