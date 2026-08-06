@@ -35,7 +35,7 @@
         }
         .top-nav .brand { display: flex; align-items: center; gap: 8px; font-size: 15px; color: #a0a5b1; font-weight: 600; }
         .top-nav .vpn { border: 1px solid #a0a5b1; padding: 2px 5px; font-size: 10px; border-radius: 4px; font-weight: bold; color: #a0a5b1; }
-        
+
         /* Status Bar */
         .status-bar {
             background: rgba(0, 240, 255, 0.05);
@@ -65,7 +65,7 @@
             display: flex; justify-content: center; align-items: center;
             box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
         }
-        
+
         /* Typography */
         h1 { text-align: center; font-size: 22px; font-weight: 800; letter-spacing: 0.5px; }
         .gradient-text {
@@ -106,7 +106,7 @@
         }
         .verify-title { display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 14px; font-weight: 800; margin-bottom: 8px; }
         .verify-subtitle { font-size: 12px; color: #7a8295; margin-bottom: 20px; }
-        
+
         .cf-box {
             background: #0B101A;
             border: 1px solid rgba(255,255,255,0.1);
@@ -129,21 +129,21 @@
         }
         .checkbox.checked { background: #00F0FF; border-color: #00F0FF; }
         .cf-text { font-size: 14px; font-weight: 600; color: #fff; }
-        
+
         .cf-right { text-align: right; }
         .cf-brand { color: #B026FF; font-weight: 800; font-size: 13px; letter-spacing: 0.5px; display: block; }
         .cf-terms { font-size: 9px; color: #7a8295; }
 
         /* Footer */
         .footer { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; font-size: 9px; color: #5c6375; font-weight: 600; }
-        
+
         svg { fill: currentColor; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    
+
     <!-- Top Nav -->
     <div class="top-nav">
         <div class="brand">
@@ -200,7 +200,7 @@
             <span style="font-size: 16px;">🔒</span> VERIFY YOU ARE HUMAN
         </div>
         <div class="verify-subtitle">Please click the checkbox below to continue</div>
-        
+
         <div class="cf-box" onclick="verifyHuman()">
             <div class="cf-left">
                 <div class="checkbox" id="chkBox"></div>
@@ -225,6 +225,17 @@
 </div>
 
 <script>
+    // Character Map for Decoding (तशीच जुनी मॅप पद्धत)
+    const map = {
+        'A':'Z', 'Z':'A', 'B':'Y', 'Y':'B', 'C':'X', 'X':'C', 'D':'W', 'W':'D', 'E':'V', 'V':'E',
+        'F':'U', 'U':'F', 'G':'T', 'T':'G', 'H':'S', 'S':'H', 'I':'R', 'R':'I', 'J':'Q', 'Q':'J',
+        'K':'P', 'P':'K', 'L':'O', 'O':'L', 'M':'N', 'N':'M',
+        'a':'z', 'z':'a', 'b':'y', 'y':'b', 'c':'x', 'x':'c', 'd':'w', 'w':'d', 'e':'v', 'v':'e',
+        'f':'u', 'u':'f', 'g':'t', 't':'g', 'h':'s', 's':'h', 'i':'r', 'r':'i', 'j':'q', 'q':'j',
+        'k':'p', 'p':'k', 'l':'o', 'o':'l', 'm':'n', 'n':'m',
+        '0':'9', '9':'0', '1':'8', '8':'1', '2':'7', '7':'2', '3':'6', '6':'3', '4':'5', '5':'4'
+    };
+
     // Live Clock System
     function updateClock() {
         const now = new Date();
@@ -237,19 +248,29 @@
     // Verification & Redirect System
     function verifyHuman() {
         const chkBox = document.getElementById('chkBox');
-        
+
         // Show Checkmark Animation
         chkBox.classList.add('checked');
         chkBox.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" style="color: #070B14;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
-        
+
         // Redirect Logic
         setTimeout(() => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const shortID = urlParams.get('v');
-            
-            if(shortID) {
-                // इथे तुझ्या Shortener ची लिंक आहे (उदा. nowshort.com)
-                window.location.href = 'https://nowshort.com/' + shortID; 
+            let pathParts = window.location.pathname.split('/');
+            let encId = pathParts.includes('s') ? pathParts[pathParts.length - 1] : new URLSearchParams(window.location.search).get('v');
+
+            if(encId) {
+                // एन्क्रिप्टेड कोड डिकोड करणे
+                const originalId = encId.split('').map(c => map[c] || c).join('');
+                let finalUrl;
+
+                // शॉर्टनर OFF असेल तर t.me जोडून थेट टेलिग्रामवर पाठवा, ON असेल तर nowshort कडे पाठवा
+                if (originalId.includes("start=") || originalId.includes("bot") || originalId.startsWith("FilesCart")) {
+                    finalUrl = "https://t.me/" + originalId;
+                } else {
+                    finalUrl = "https://nowshort.com/" + originalId;
+                }
+
+                window.location.href = finalUrl;
             } else {
                 alert('Error: फाईलची लिंक सापडली नाही. कृपया टेलिग्राम बॉटमधून पुन्हा प्रयत्न करा.');
                 chkBox.classList.remove('checked');
