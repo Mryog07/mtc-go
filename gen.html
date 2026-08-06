@@ -129,10 +129,18 @@
     };
     function updateTime() { const now = new Date(); document.getElementById('time').innerText = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' }); }
     setInterval(updateTime, 1000); updateTime();
-    let pathParts = window.location.pathname.split('/');
-    let encId = pathParts.includes('s') ? pathParts[pathParts.length - 1] : new URLSearchParams(window.location.search).get('v');
-    if (encId) { document.getElementById('genUI').style.display = 'none'; document.getElementById('capUI').style.display = 'block'; }
     
+    // सुधारित पाथ आणि क्वेरी पार्सिंग लॉजिक (404 एरर रोखण्यासाठी)
+    let fullPath = window.location.pathname + window.location.search;
+    let encId = "";
+    if (fullPath.includes('/s/')) {
+        encId = fullPath.split('/s/')[1];
+    } else {
+        encId = new URLSearchParams(window.location.search).get('v');
+    }
+
+    if (encId) { document.getElementById('genUI').style.display = 'none'; document.getElementById('capUI').style.display = 'block'; }
+
     function gen() {
         let generatedLinks = [];
         for(let i = 1; i <= 3; i++) {
@@ -168,7 +176,7 @@
             setTimeout(() => { 
                 let finalUrl;
 
-                // जर डिकोड केलेली लिंक http ने सुरू होत असेल (किंवा टेलिग्रामची लिंक असेल), तर ती थेट वापरा
+                // जर डिकोड केलेली लिंक http ने सुरू होत असेल किंवा टेलिग्रामची लिंक असेल, तर ती थेट वापरा
                 if (originalId.startsWith("http") || originalId.includes("t.me/") || originalId.includes("start=")) {
                     if (originalId.startsWith("http")) {
                         finalUrl = originalId;
